@@ -1,0 +1,20 @@
+{
+  "board-0": {
+    "id": 0,
+    "name": "Montessouri Toys",
+    "imageUrl": "https://res.cloudinary.com/babylist/image/upload/f_auto,q_auto:best,c_scale,w_768/v1576004166/hello-baby/best-montessori-toys-0-12-months-header.jpg",
+    "numberOfPins": 3
+  },
+  "board-1": {
+    "id": 1,
+    "name": "Christmas Gift Ideas",
+    "imageUrl": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gh-092820-virtual-gift-ideas-1601480380.png",
+    "numberOfPins": 3
+  },
+  "board-2": {
+    "id": 2,
+    "name": "UI/UX Articles",
+    "imageUrl": "https://wandr.studio/wp-content/uploads/2019/12/taras-shypka-iFSvn82XfGo-unsplash-600x400.webp",
+    "numberOfPins": 3
+  }
+}
