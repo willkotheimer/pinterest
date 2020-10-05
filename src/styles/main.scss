@@ -8,3 +8,26 @@ body {
 .hide {
   display: none;
 }
+
+#pinboard {
+  margin-left: 20px;
+}
+
+h1 {
+  margin-left: 50px;
+}
+.myboards {
+  display: flex;
+  flex-wrap: row-wrap;
+  margin: 50px;
+}
+.board-img {
+  height: 200px;
+  width: auto;
+}
+
+.board {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid brown;
+}

@@ -11,7 +11,7 @@ const home = () => {
 };
 
 const showHome = () => {
-  $('#pinboard').html(home());
+  $('#pinboard1').html(home());
 };
 
 export default { showHome };
