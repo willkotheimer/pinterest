@@ -1,17 +1,22 @@
-const board = () => {
+// import boardData from '../../helpers/data/boardData';
+
+const boardStuff = () => {
   const myString = `
   <div class="row">
   <div class="span9 ">
   <i class="fab fa-pinterest"></i><h1>Boards</h1>
-  
+  <div id='myBoards'>
+  </div>
   </div>
 </div>
   `;
   return myString;
 };
 
-const showBoard = () => {
-  $('#pinboard').html(board());
+const boardView = (myBoards) => {
+  const boardSpace = boardStuff();
+  $('#pinboard1').html(boardSpace);
+  $('#myBoards').html(`${myBoards}`);
 };
 
-export default { showBoard };
+export default { boardView };
