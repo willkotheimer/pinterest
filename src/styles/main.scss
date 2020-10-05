@@ -16,18 +16,19 @@ body {
 h1 {
   margin-left: 50px;
 }
-.myboards {
+.myboards, .myPins {
   display: flex;
   flex-wrap: row-wrap;
   margin: 50px;
 }
-.board-img {
+.board-img, .pin-img {
   height: 200px;
   width: auto;
 }
 
-.board {
+.board, .pin {
   margin: 10px;
   padding: 10px;
   border: 1px solid brown;
 }
+

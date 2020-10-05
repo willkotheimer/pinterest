@@ -4,6 +4,8 @@ import home from '../../components/home/home';
 import boards from '../../components/boards/board';
 import userData from './userData';
 import boardData from './boardData';
+import pinsData from './pinsData';
+import pinsView from '../../components/views/pinView';
 
 const checkLoginStatus = () => {
   firebase.auth().onAuthStateChanged((user) => {
@@ -14,6 +16,14 @@ const checkLoginStatus = () => {
       $('#navbar-logout-button').removeClass('hide');
       const myBoards = boardData.showBoards(currentUser.uid);
       boards.boardView(myBoards);
+
+      // Create events to make boards go to pins:
+      $('body').on('click', '.board', (e) => {
+        const boardClicked = e.currentTarget.id;
+        const myPins = pinsData.showPins(boardClicked);
+        pinsView.PinView();
+        console.warn(myPins);
+      });
     } else {
       // person is not logged in
       $('#navbar-logout-button').addClass('hide');
