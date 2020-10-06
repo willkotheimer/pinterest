@@ -21,8 +21,7 @@ const checkLoginStatus = () => {
       $('body').on('click', '.board', (e) => {
         const boardClicked = e.currentTarget.id;
         const myPins = pinsData.showPins(boardClicked);
-        pinsView.PinView();
-        console.warn(myPins);
+        pinsView.PinView(myPins);
       });
     } else {
       // person is not logged in
