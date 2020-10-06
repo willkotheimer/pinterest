@@ -19,6 +19,8 @@ const PinsInfo = (boardId) => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
+const deletePin = (firebaseKey) => axios.delete(`${baseUrl}/pins/pin-${firebaseKey}.json`);
+
 const showPins = (boardId) => {
   let myString = '<div class="myPins">';
   PinsInfo(boardId)
@@ -26,7 +28,7 @@ const showPins = (boardId) => {
       Object.keys(response).forEach((key, index) => {
         const item = response[key];
         if (index === 0) myString += `<button id='${item.Uid}' type='button' class='backToBoards btn btn-warning'><i class="fas fa-chevron-circle-left"></i></button>`;
-        myString += `<div class='pin pin-${item.id}' id='${item.id}'>
+        myString += `<div class='pin pin-${item.id}'><div class='delete-pin' id='${item.id}' data-toggle="tooltip" data-placement="top" title="Delete Pin"><i class="fas fa-minus-circle"></i></div>
         <div class='pin-image'>
         <img class='pin-img' src='${item.imageUrl}'/>
         </div>
@@ -41,6 +43,13 @@ const showPins = (boardId) => {
         const currentUser = e.currentTarget.id;
         const myBoards = boardData.showBoards(currentUser);
         boards.boardView(myBoards);
+      });
+      /* delete button */
+      $('body').on('click', '.delete-pin', (e) => {
+        e.stopImmediatePropagation();
+        const firebaseKey = e.currentTarget.id;
+        $(`.pin-${firebaseKey}`).remove();
+        deletePin(firebaseKey);
       });
     });
 };
