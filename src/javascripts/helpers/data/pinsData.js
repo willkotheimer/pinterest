@@ -1,6 +1,5 @@
 import axios from 'axios';
 import apiKeys from '../apiKeys.json';
-import boardData from './boardData';
 import boards from '../../components/boards/board';
 
 const baseUrl = apiKeys.firebaseKeys.databaseURL;
@@ -22,6 +21,7 @@ const PinsInfo = (boardId) => new Promise((resolve, reject) => {
 const deletePin = (firebaseKey) => axios.delete(`${baseUrl}/pins/pin-${firebaseKey}.json`);
 
 const showPins = (boardId) => {
+  console.warn(`inside show pins-${boardId}`);
   let myString = '<div class="myPins">';
   PinsInfo(boardId)
     .then((response) => {
@@ -41,8 +41,7 @@ const showPins = (boardId) => {
       /* back button: */
       $('body').on('click', '.backToBoards', (e) => {
         const currentUser = e.currentTarget.id;
-        const myBoards = boardData.showBoards(currentUser);
-        boards.boardView(myBoards);
+        boards.boardView(currentUser);
       });
       /* delete button */
       $('body').on('click', '.delete-pin', (e) => {

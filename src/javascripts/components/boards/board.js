@@ -1,4 +1,4 @@
-// import boardData from '../../helpers/data/boardData';
+import boardData from '../../helpers/data/boardData';
 
 const boardStuff = () => {
   const myString = `
@@ -13,7 +13,8 @@ const boardStuff = () => {
   return myString;
 };
 
-const boardView = (myBoards) => {
+const boardView = (currentUser) => {
+  const myBoards = boardData.showBoards(currentUser);
   const boardSpace = boardStuff();
   $('#pinboard1').html(boardSpace);
   $('#myBoards').html(`${myBoards}`);
