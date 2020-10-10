@@ -19,30 +19,58 @@ const PinsInfo = (BoardfirebaseKey) => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
+const boardsInfoHelper = (userId) => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/boards.json?orderBy="Uid"&"boardId="${userId}"`)
+    .then((response) => {
+      const boardsData = response.data;
+      const board = [];
+      if (boardsData) {
+        Object.keys(boardsData).forEach((boardId) => {
+          const concatIdName = `${boardsData[boardId].firebaseKey}|${boardsData[boardId].name}`;
+          board.push(concatIdName);
+        });
+      }
+      resolve(board);
+    }).catch((error) => reject(error));
+});
+
 const addPins = (data) => axios.post(`${baseUrl}/pins.json`, data)
   .then((response) => {
     const update = { pinId: response.data };
     axios.patch(`${baseUrl}/pins/${response.data.name}.json`, update);
   }).catch((error) => console.warn(error));
 
+const patchPins = (body, firebaseKey) => {
+  console.warn(`${baseUrl}/pins/${firebaseKey}.json`, body);
+  axios.patch(`${baseUrl}/pins/${firebaseKey}.json`, body);
+};
+
 const deletePin = (firebaseKey) => axios.delete(`${baseUrl}/pins/${firebaseKey}.json`);
 
 const showPins = (boardId, user) => {
+  let myBoards = '';
+  boardsInfoHelper(user)
+    .then((response) => {
+      Object.keys(response).forEach((key) => {
+        console.warn('response', response[key]);
+        myBoards += `${response[key]}*`;
+      });
+    });
   let myString = '<div class="myPins">';
   PinsInfo(boardId)
     .then((response) => {
       Object.keys(response).forEach((key, index) => {
         const item = response[key];
-        console.warn('in this pins:', item);
         if (index === 0) myString += `<button id='${item.Uid}' type='button' class='backToBoards btn btn-warning'><i class="fas fa-chevron-circle-left"></i></button>`;
         myString += `<div class='pin pin-${item.pinId.name}'>
-        <div class='button-container'><div class='delete-pin' id='${item.pinId.name}|${boardId}|${user}' 
-        data-toggle="tooltip" data-placement="top" title="Delete Pin"><i class="fas fa-minus-circle"></i></div>
-        <div class='edit-pin' id='edit-${item.pinId.name}' data-toggle="tooltip" data-placement="top" title="Edit"><i class="far fa-edit"></i></div></div>
+        <div class='button-container'><button class='btn btn-danger delete-pin' id='${item.pinId.name}|${boardId}|${user}' 
+        data-toggle="tooltip" data-placement="top" title="Delete Pin"><i class="fas fa-minus-circle"></i></button>
+        <button type="button" class='edit-pin btn btn-primary' id='${item.pinId.name}*${myBoards}' 
+        data-val='${item.Uid}' data-placement="top" title="Edit" data-toggle="modal" data-target="#pinsPatchModal"><i class="far fa-edit"></i></button></div
         <div class='pin-image'>
         <img class='pin-img' src='${item.imageUrl}'/>
-        </div>
         <div><a href='${item.linkUrl}'/>${item.name}</a></div>
+        </div>
         </div>
         `;
       });
@@ -66,13 +94,7 @@ const showPins = (boardId, user) => {
         const myPins = showPins(bid, userId);
         pinsView.PinView(myPins);
       });
-      /* patch button */
-      $('body').on('click', '.edit-pin', (e) => {
-        e.stopImmediatePropagation();
-        const firebaseKey = e.currentTarget.id;
-        console.warn(`edit pin on board: ${firebaseKey}`);
-      });
     });
 };
 
-export default { showPins, addPins };
+export default { showPins, addPins, patchPins };
