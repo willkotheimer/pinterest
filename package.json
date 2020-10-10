@@ -5,7 +5,8 @@
   "main": "src/javascripts/main.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
-    "build": "webpack --mode production --module-bind js=babel-loader"
+    "build": "webpack --mode production --module-bind js=babel-loader",
+    "deploy": "npm run build && firebase deploy"
   },
   "keywords": [],
   "author": "",
@@ -25,8 +26,8 @@
     "mini-css-extract-plugin": "0.10.0",
     "node-sass": "4.14.1",
     "sass-loader": "10.0.1",
-    "webpack": "4.44.1",
-    "webpack-cli": "3.3.12",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
     "webpack-dev-server": "3.11.0"
   },
   "dependencies": {

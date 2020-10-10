@@ -18,7 +18,7 @@ const boardsInfo = (userId) => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
-const deleteBoard = (firebaseKey) => axios.delete(`${baseUrl}/boards/board-${firebaseKey}.json`);
+const deleteBoard = (firebaseKey) => axios.delete(`${baseUrl}/boards/${firebaseKey}.json`);
 const deleteOrphanedPin = (pinId) => {
   axios.delete(`${baseUrl}/pins/pin-${pinId}.json`);
 };
@@ -37,14 +37,25 @@ const getAllOrphanedPins = (boardId) => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
+const addBoard = (data) => axios.post(`${baseUrl}/boards.json`, data)
+  .then((response) => {
+    const update = { firebaseKey: response.data.name };
+    axios.patch(`${baseUrl}/boards/${response.data.name}.json`, update);
+    $('#boardsModal').modal('toggle');
+    $('modal-backdrop').remove();
+  }).catch((error) => console.warn(error));
+
 const showBoards = (userId) => {
   let myString = '<div class="myboards">';
   boardsInfo(userId)
     .then((response) => {
       Object.keys(response).forEach((key) => {
         const item = response[key];
-        myString += `<div id='board-${item.id}' class='board board-${item.id}'>
-        <div class='delete-board' id='${item.id}' data-toggle="tooltip" data-placement="top" title="Delete Board"><i class="fas fa-minus-circle"></i></div>
+        myString += `<div id='${item.firebaseKey}|${userId}' class='addBoard board board-${item.firebaseKey}'>
+        <div class='button-container'>
+        <div class='delete-board' id='delete-${item.firebaseKey}' data-toggle="tooltip" data-placement="top" title="Delete Board"><i class="fas fa-minus-circle"></i></div>
+        <div class='edit-board' id='edit-${item.firebaseKey}' data-toggle="tooltip" data-placement="top" title="Edit"><i class="far fa-edit"></i></div>
+        </div>
         <div class='board-image'>
         <img class='board-img' src='${item.imageUrl}'/>
         </div>
@@ -52,15 +63,32 @@ const showBoards = (userId) => {
         </div>
         `;
       });
-      myString += '</div>';
+      myString += `<!-- Button to Open the Modal -->
+      <button type="button" class="btn btn-primary" data-val="${userId}" data-toggle="modal" data-target="#boardModal">
+      <i class="fas fa-plus-circle"></i> Add Board
+      </button>`;
       $('#myBoards').html(`${myString}`);
     });
 };
 
+/* patch button */
+$('body').on('click', '.add-board', (e) => {
+  e.stopImmediatePropagation();
+  const firebaseKey = e.currentTarget.id;
+  console.warn(`add board: ${firebaseKey}`);
+});
+/* post button */
+$('body').on('click', '.edit-board', (e) => {
+  e.stopImmediatePropagation();
+  const firebaseKey = e.currentTarget.id;
+  console.warn(`edit board: ${firebaseKey}`);
+});
+
 /* delete button */
 $('body').on('click', '.delete-board', (e) => {
   e.stopImmediatePropagation();
-  const firebaseKey = e.currentTarget.id;
+  const firebaseKey = (e.currentTarget.id).split('-')[1];
+  console.warn(firebaseKey);
   deleteBoard(firebaseKey);
   $(`.board-${firebaseKey}`).remove();
   Promise.all([getAllOrphanedPins(firebaseKey)])
@@ -74,4 +102,4 @@ $('body').on('click', '.delete-board', (e) => {
     });
 });
 
-export default { showBoards };
+export default { showBoards, addBoard };
