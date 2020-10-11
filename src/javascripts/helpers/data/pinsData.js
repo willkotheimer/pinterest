@@ -55,14 +55,12 @@ const showPins = (boardId, user) => {
         myBoards += `${response[key]}*`;
       });
     });
-  let myString = '<div class="myPins d-flex flex-row">';
+  let myString = `<button id='${user}' type='button' class='backToBoards btn btn-warning'><i class='fas fa-chevron-circle-left'></i></button>`;
   PinsInfo(boardId)
     .then((response) => {
-      Object.keys(response).forEach((key, index) => {
+      Object.keys(response).forEach((key) => {
         const item = response[key];
-        if (index === 0) myString += `<button id='${item.Uid}' type='button' class='backToBoards btn btn-warning'><i class="fas fa-chevron-circle-left"></i></button>`;
-        myString += `<div class='pin pin-${item.pinId.name}'>
-        <div class='button-container'><button class='btn btn-danger delete-pin' id='${item.pinId.name}|${boardId}|${user}' 
+        myString += `<div class='pin pin-${item.pinId.name}'><div class='button-container'><button class='btn btn-danger delete-pin' id='${item.pinId.name}|${boardId}|${user}' 
         data-toggle="tooltip" data-placement="top" title="Delete Pin"><i class="fas fa-minus-circle"></i></button>
         <button type="button" class='edit-pin btn btn-primary' id='${item.pinId.name}*${myBoards}' 
         data-val='${item.Uid}' data-placement="top" title="Edit" data-toggle="modal" data-target="#pinsPatchModal"><i class="far fa-edit"></i></button></div
@@ -74,7 +72,7 @@ const showPins = (boardId, user) => {
         `;
       });
       myString += `<!-- Button to Open the Modal -->
-      <button type="button" class="btn btn-primary" id="${boardId}|${user}" data-toggle="modal" data-target="#pinsModal">
+      <button type="button" class="btn btn-primary add-pin" id="${boardId}|${user}" data-toggle="modal" data-target="#pinsModal">
       <i class="fas fa-plus-circle"></i> Add A Pin
       </button>`;
       $('#myPins').html(`${myString}`);
