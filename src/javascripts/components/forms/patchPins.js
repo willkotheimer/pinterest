@@ -28,14 +28,10 @@ $('body').on('click', '#pinPatchSubmit', (e) => {
     $('#error-message').html('<div class="alert alert-danger" role="alert">Please complete all fields</div>');
   } else {
     $('#error-message').html('');
-    pinsData.patchPins(data, pinId)
-      .then(() => {
-        $('#success-message').html('<div class="alert alert-success" role="alert">Your pin Was Added!</div>');
-        setTimeout(() => {
-          $('#success-message').html('');
-          $('#pinsPatchModal').modal('toggle');
-        }, 1500);
-      }).catch((error) => console.warn(error));
+    pinsData.patchPins(data, pinId);
+    $(`.pin-${pinId}`).remove();
+    $('#pinsPatchModal').hide();
+    $('.modal-backdrop').removeClass('show').addClass('hide');
   }
 });
 

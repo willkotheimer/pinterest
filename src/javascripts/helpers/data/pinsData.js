@@ -41,8 +41,7 @@ const addPins = (data) => axios.post(`${baseUrl}/pins.json`, data)
   }).catch((error) => console.warn(error));
 
 const patchPins = (body, firebaseKey) => {
-  console.warn(`${baseUrl}/pins/${firebaseKey}.json`, body);
-  axios.patch(`${baseUrl}/pins/${firebaseKey}.json`, body);
+  axios.patch(`${baseUrl}/pins/${firebaseKey}.json`, body).catch((error) => console.warn(error));
 };
 
 const deletePin = (firebaseKey) => axios.delete(`${baseUrl}/pins/${firebaseKey}.json`);
@@ -56,7 +55,7 @@ const showPins = (boardId, user) => {
         myBoards += `${response[key]}*`;
       });
     });
-  let myString = '<div class="myPins">';
+  let myString = '<div class="myPins d-flex flex-row">';
   PinsInfo(boardId)
     .then((response) => {
       Object.keys(response).forEach((key, index) => {
