@@ -1,7 +1,6 @@
 import boardForm from '../forms/addBoard';
 import pinsForm from '../forms/addPin';
 import PatchPins from '../forms/patchPins';
-import boardData from '../../helpers/data/boardData';
 
 const boardsModal = () => {
   $('#boardModal').html(`<!-- The Modal -->
@@ -66,20 +65,9 @@ const pinsModalPatch = () => {
     </div>`);
 };
 
-const registerPatch = () => {
-  $('#pinsPatchModal').on('show.bs.modal', (event) => {
-    const firebaseKey = event.relatedTarget.id.split('-')[1];
-    console.warn(firebaseKey);
-    console.warn('my stuff here:', boardData.boardsInfo(firebaseKey));
-    // $('#pinsPatchModal #userId').val(firebaseKey);
-    // $('#pinsPatchModal #boardId').val(firebaseKey);
-  });
-};
-
 export default
 {
   boardsModal,
   pinsModal,
-  pinsModalPatch,
-  registerPatch
+  pinsModalPatch
 };

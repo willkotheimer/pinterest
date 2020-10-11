@@ -69,18 +69,10 @@ const showBoards = (userId) => {
     });
 };
 
-/* post button */
-$('body').on('click', '.edit-board', (e) => {
-  e.stopImmediatePropagation();
-  const firebaseKey = e.currentTarget.id;
-  console.warn(`edit board: ${firebaseKey}`);
-});
-
 /* delete button */
 $('body').on('click', '.delete-board', (e) => {
   e.stopImmediatePropagation();
   const firebaseKey = (e.currentTarget.id).split('-')[1];
-  console.warn(firebaseKey);
   deleteBoard(firebaseKey);
   $(`.board-${firebaseKey}`).remove();
   Promise.all([getAllOrphanedPins(firebaseKey)])

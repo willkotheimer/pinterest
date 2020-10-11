@@ -17,13 +17,11 @@ const pinPatchForm = () => {
 };
 
 $('body').on('click', '#pinPatchSubmit', (e) => {
-  console.warn('in patch pin submit');
   e.preventDefault();
   const pinId = $('#pinsPatchModal #pinId').val();
   const data = {
     boardId: $('#pinsPatchModal #boardId :selected').attr('id')
   };
-  console.warn(data, pinId);
   if (Object.values(data).includes(false)) {
     $('#error-message').html('<div class="alert alert-danger" role="alert">Please complete all fields</div>');
   } else {

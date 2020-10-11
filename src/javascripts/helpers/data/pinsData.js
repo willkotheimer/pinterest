@@ -51,7 +51,6 @@ const showPins = (boardId, user) => {
   boardsInfoHelper(user)
     .then((response) => {
       Object.keys(response).forEach((key) => {
-        console.warn('response', response[key]);
         myBoards += `${response[key]}*`;
       });
     });

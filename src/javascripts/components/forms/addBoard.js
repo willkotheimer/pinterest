@@ -35,7 +35,6 @@ $('body').on('click', '#Boardsubmit', (e) => {
   $('#imageUrl').val('');
 
   const finish = (uid) => {
-    console.warn(uid);
     $('#boardModal').remove();
     setTimeout(() => {
       boards.boardView(uid);

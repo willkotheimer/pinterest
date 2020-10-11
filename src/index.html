@@ -52,7 +52,6 @@
     });
     $('#pinsPatchModal').on('show.bs.modal', (event) => {
       const firebaseKey = event.relatedTarget.id.split('*');
-      console.warn(firebaseKey);
       const pinId = firebaseKey.shift();
       let myBoards = '';
       firebaseKey.forEach((item) => {
@@ -62,7 +61,6 @@
         }
       });
       $('#pinsPatchModal #boardId').html(myBoards);
-      console.warn(pinId);
       $('#pinsPatchModal #pinId').val(pinId);
     });
   </script>

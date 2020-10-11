@@ -15,7 +15,6 @@ const init = () => {
   addModalView.boardsModal();
   addModalView.pinsModal();
   addModalView.pinsModalPatch();
-  addModalView.registerPatch();
 };
 
 init();

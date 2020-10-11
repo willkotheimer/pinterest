@@ -19,7 +19,6 @@ const checkLoginStatus = () => {
       $('body').on('click', '.board', (e) => {
         const boardClicked = e.currentTarget.id;
         const [boardId, userId] = boardClicked.split('|');
-        console.warn(boardId, userId);
         const myPins = pinsData.showPins(boardId, userId);
         pinsView.PinView(myPins);
       });
