@@ -35,6 +35,7 @@
 
   <div class="modal" id="boardModal"></div>
   <div class="modal" id="pinsModal"></div>
+  <div class="modal" id="pinsPatchModal"></div>
 
   <script type="text/javascript">
     $('#boardModal').on('show.bs.modal', (event) => {
@@ -47,6 +48,21 @@
       const [board, user] = id.split('|');
       $('#pinsModal #userId').val(user);
       $('#pinsModal #boardId').val(board);
+    });
+    $('#pinsPatchModal').on('show.bs.modal', (event) => {
+      const firebaseKey = event.relatedTarget.id.split('*');
+      console.warn(firebaseKey);
+      const pinId = firebaseKey.shift();
+      let myBoards = '';
+      firebaseKey.forEach((item) => {
+        [itemId, itemName] = item.split('|');
+        if (itemId) {
+          myBoards += `<option id='${itemId}'>${itemName}</option>`;
+        }
+      });
+      $('#pinsPatchModal #boardId').html(myBoards);
+      console.warn(pinId);
+      $('#pinsPatchModal #pinId').val(pinId);
     });
   </script>
 

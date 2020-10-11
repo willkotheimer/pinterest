@@ -14,6 +14,8 @@ const init = () => {
   myNavbar.logOutEvent();
   addModalView.boardsModal();
   addModalView.pinsModal();
+  addModalView.pinsModalPatch();
+  addModalView.registerPatch();
 };
 
 init();

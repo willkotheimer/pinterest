@@ -51,7 +51,8 @@ $('body').on('click', '#pinSubmit', (e) => {
           $('#success-message').html('');
         }, 1500)
           .then(() => {
-            $('#pinsModal').modal('toggle');
+            $('#pinsPatchModal').hide();
+            $('.modal-backdrop').removeClass('show').addClass('hide');
           });
       }).catch((error) => console.warn(error));
   }

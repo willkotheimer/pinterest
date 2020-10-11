@@ -54,7 +54,6 @@ const showBoards = (userId) => {
         myString += `<div id='${item.firebaseKey}|${userId}' class='addBoard board board-${item.firebaseKey}'>
         <div class='button-container'>
         <div class='delete-board' id='delete-${item.firebaseKey}' data-toggle="tooltip" data-placement="top" title="Delete Board"><i class="fas fa-minus-circle"></i></div>
-        <div class='edit-board' id='edit-${item.firebaseKey}' data-toggle="tooltip" data-placement="top" title="Edit"><i class="far fa-edit"></i></div>
         </div>
         <div class='board-image'>
         <img class='board-img' src='${item.imageUrl}'/>
@@ -71,12 +70,6 @@ const showBoards = (userId) => {
     });
 };
 
-/* patch button */
-$('body').on('click', '.add-board', (e) => {
-  e.stopImmediatePropagation();
-  const firebaseKey = e.currentTarget.id;
-  console.warn(`add board: ${firebaseKey}`);
-});
 /* post button */
 $('body').on('click', '.edit-board', (e) => {
   e.stopImmediatePropagation();
@@ -102,4 +95,4 @@ $('body').on('click', '.delete-board', (e) => {
     });
 });
 
-export default { showBoards, addBoard };
+export default { showBoards, addBoard, boardsInfo };
