@@ -3,7 +3,7 @@ const PinStuff = () => {
   <div class="row">
   <div class="span9 ">
   <i class="fab fa-pinterest"></i><h1>Pins</h1>
-  <div id='myPins'>
+  <div id='myPins' class='myPins'>
   </div>
   </div>
 </div>

@@ -46,12 +46,15 @@ const addBoard = (data) => axios.post(`${baseUrl}/boards.json`, data)
   }).catch((error) => console.warn(error));
 
 const showBoards = (userId) => {
-  let myString = '<div class="myboards">';
+  let myString = `<!-- Button to Open the Modal -->
+      <button type='button' class='btn btn-primary add-board' data-val='${userId}' data-toggle='modal' data-target='#boardModal'>
+      <i class="fas fa-plus-circle"></i> Add Board
+      </button><div class='myBoards'>`;
   boardsInfo(userId)
     .then((response) => {
       Object.keys(response).forEach((key) => {
         const item = response[key];
-        myString += `<div id='${item.firebaseKey}|${userId}' class='addBoard board board-${item.firebaseKey}'>
+        myString += `<div id='${item.firebaseKey}|${userId}' class='board board-${item.firebaseKey}'>
         <div class='button-container'>
         <div class='delete-board' id='delete-${item.firebaseKey}' data-toggle="tooltip" data-placement="top" title="Delete Board"><i class="fas fa-minus-circle"></i></div>
         </div>
@@ -62,10 +65,6 @@ const showBoards = (userId) => {
         </div>
         `;
       });
-      myString += `<!-- Button to Open the Modal -->
-      <button type="button" class="btn btn-primary" data-val="${userId}" data-toggle="modal" data-target="#boardModal">
-      <i class="fas fa-plus-circle"></i> Add Board
-      </button>`;
       $('#myBoards').html(`${myString}`);
     });
 };
