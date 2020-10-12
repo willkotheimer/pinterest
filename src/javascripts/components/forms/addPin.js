@@ -27,7 +27,6 @@ const pinForm = () => {
 
 $('body').on('click', '#pinSubmit', (e) => {
   e.preventDefault();
-  console.warn($('#pinsModal #imageUrl').val());
   const data = {
     Uid: $('#pinsModal #userId').val() || false,
     imageUrl: $('#pinsModal #imageUrl').val() || false,
@@ -40,20 +39,21 @@ $('body').on('click', '#pinSubmit', (e) => {
   $('#imageUrl').val('');
   $('#boardId').val('');
   $('#linkUrl').val('');
+  const finish = () => {
+    $('.modal-backdrop').removeClass('show').addClass('hide');
+    $('#pinsModal').remove();
+  };
   if (Object.values(data).includes(false)) {
     $('#error-message').html('<div class="alert alert-danger" role="alert">Please complete all fields</div>');
   } else {
     $('#error-message').html('');
-    pinsData.addPins(data)
+    pinsData.addPins(data, data.boardId, data.Uid)
       .then(() => {
         $('#success-message').html('<div class="alert alert-success" role="alert">Your pin Was Added!</div>');
         setTimeout(() => {
           $('#success-message').html('');
         }, 1500)
-          .then(() => {
-            $('#pinsPatchModal').hide();
-            $('.modal-backdrop').removeClass('show').addClass('hide');
-          });
+          .then(finish());
       }).catch((error) => console.warn(error));
   }
 });

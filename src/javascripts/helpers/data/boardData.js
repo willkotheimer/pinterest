@@ -41,8 +41,6 @@ const addBoard = (data) => axios.post(`${baseUrl}/boards.json`, data)
   .then((response) => {
     const update = { firebaseKey: response.data.name };
     axios.patch(`${baseUrl}/boards/${response.data.name}.json`, update);
-    $('#boardsModal').modal('toggle');
-    $('modal-backdrop').remove();
   }).catch((error) => console.warn(error));
 
 const showBoards = (userId) => {

@@ -23,37 +23,38 @@ const boardForm = () => {
 
 $('body').on('click', '#Boardsubmit', (e) => {
   e.preventDefault();
-
-  const data = {
-    Uid: $('#boardUserId').val() || false,
-    imageUrl: $('#imageUrl').val() || false,
-    name: $('#name').val() || false,
-    numberOfPins: 0
-  };
-  $('#boardUserId').val('');
-  $('#name').val('');
-  $('#imageUrl').val('');
-
-  const finish = (uid) => {
-    $('#boardModal').remove();
-    setTimeout(() => {
-      boards.boardView(uid);
-    }, 1500);
-  };
-
-  if (Object.values(data).includes(false)) {
-    $('#error-message').html('<div class="alert alert-danger" role="alert">Please complete all fields</div>');
-  } else {
-    $('#error-message').html('');
-    boardData.addBoard(data)
-      .then(() => {
-        $('#success-message').html('<div class="alert alert-success" role="alert">Your board Was Added!</div>');
-        setTimeout(() => {
-          $('#success-message').html('');
-        }, 1500)
-          .then(finish(data.Uid));
-      }).catch((error) => console.warn(error));
-  }
+  setTimeout(() => {
+    const data = {
+      Uid: $('#boardUserId').val() || false,
+      imageUrl: $('#imageUrl').val() || false,
+      name: $('#name').val() || false,
+      numberOfPins: 0
+    };
+    $('#boardUserId').val('');
+    $('#name').val('');
+    $('#imageUrl').val('');
+    const finish = (uid) => {
+      console.warn('finished');
+      $('.modal-backdrop').removeClass('show').addClass('hide');
+      $('#boardModal').remove();
+      setTimeout(() => {
+        boards.boardView(uid);
+      }, 1500);
+    };
+    if (Object.values(data).includes(false)) {
+      $('#error-message').html('<div class="alert alert-danger" role="alert">Please complete all fields</div>');
+    } else {
+      $('#error-message').html('');
+      boardData.addBoard(data)
+        .then(() => {
+          $('#success-message').html('<div class="alert alert-success" role="alert">Your board Was Added!</div>');
+          setTimeout(() => {
+            $('#success-message').html('');
+          }, 1500)
+            .then(finish(data.Uid));
+        }).catch((error) => console.warn(error));
+    }
+  }, 3000);
 });
 
 export default { boardForm };

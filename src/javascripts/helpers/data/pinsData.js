@@ -34,12 +34,6 @@ const boardsInfoHelper = (userId) => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
-const addPins = (data) => axios.post(`${baseUrl}/pins.json`, data)
-  .then((response) => {
-    const update = { pinId: response.data };
-    axios.patch(`${baseUrl}/pins/${response.data.name}.json`, update);
-  }).catch((error) => console.warn(error));
-
 const patchPins = (body, firebaseKey) => {
   axios.patch(`${baseUrl}/pins/${firebaseKey}.json`, body).catch((error) => console.warn(error));
 };
@@ -59,7 +53,8 @@ const showPins = (boardId, user) => {
     .then((response) => {
       Object.keys(response).forEach((key) => {
         const item = response[key];
-        myString += `<div class='pin pin-${item.pinId.name}'><div class='button-container'><button class='btn btn-danger delete-pin' id='${item.pinId.name}|${boardId}|${user}' 
+        if (item) {
+          myString += `<div class='pin pin-${item.pinId.name}'><div class='button-container'><button class='btn btn-danger delete-pin' id='${item.pinId.name}|${boardId}|${user}' 
         data-toggle="tooltip" data-placement="top" title="Delete Pin"><i class="fas fa-minus-circle"></i></button>
         <button type="button" class='edit-pin btn btn-primary' id='${item.pinId.name}*${myBoards}' 
         data-val='${item.Uid}' data-placement="top" title="Edit" data-toggle="modal" data-target="#pinsPatchModal"><i class="far fa-edit"></i></button></div
@@ -69,6 +64,7 @@ const showPins = (boardId, user) => {
         </div>
         </div>
         `;
+        }
       });
       myString += `<!-- Button to Open the Modal -->
       <button type="button" class="btn btn-primary add-pin" id="${boardId}|${user}" data-toggle="modal" data-target="#pinsModal">
@@ -93,4 +89,21 @@ const showPins = (boardId, user) => {
     });
 };
 
+// Need to fix and test!
+const addPins = (data, bid, userId) => axios.post(`${baseUrl}/pins.json`, data)
+  .then((response) => {
+    const update = { pinId: response.data };
+    const promise1 = new Promise((resolve, reject) => {
+      const patch = axios.patch(`${baseUrl}/pins/${response.data.name}.json`, update);
+      Promise.all([promise1]).then(() => {
+        setTimeout(() => {
+          const myPins = showPins(bid, userId);
+          pinsView.PinView(myPins);
+        }, 1500);
+      }).then((myPins) => {
+        resolve(myPins);
+      }).catch((error) => reject(error));
+      resolve(patch);
+    });
+  });
 export default { showPins, addPins, patchPins };
