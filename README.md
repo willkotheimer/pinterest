@@ -18,7 +18,7 @@ Vanilla Javascript ES6, Jquery, HTML5, CSS3, axios and postman for api fetching,
 
 ## URL
 
-[https://pinterest-32a4e.web.app/](https://pinterest-32a4e.web.app/)
+[https://pinterest-32a4e.web.app](https://pinterest-32a4e.web.app)
 
 ## Features
 This site features a way to add and delete boards, and add, delete, and update Pins.
