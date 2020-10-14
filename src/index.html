@@ -15,7 +15,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">
-      <img class="logo-img" src="https://cdn11.bigcommerce.com/s-sq9zkarfah/images/stencil/1280x1280/products/126171/119440/The-Pixies-Lightning-Bolt-Band-Logo-Vinyl-Decal-Sticker__81920.1507851655.jpg?c=2"/></a>
+      <img class="logo-img" alt="Pixitrist" src="https://cdn11.bigcommerce.com/s-sq9zkarfah/images/stencil/1280x1280/products/126171/119440/The-Pixies-Lightning-Bolt-Band-Logo-Vinyl-Decal-Sticker__81920.1507851655.jpg?c=2"/></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -46,21 +46,22 @@
 
     $('#pinsModal').on('show.bs.modal', (event) => {
       const id = event.relatedTarget.id;
-      const [board, user] = id.split('|');
+      const [board, user] = id.split('__');
       $('#pinsModal #userId').val(user);
       $('#pinsModal #boardId').val(board);
     });
     $('#pinsPatchModal').on('show.bs.modal', (event) => {
-      const firebaseKey = event.relatedTarget.id.split('*');
+      const firebaseKey = event.relatedTarget.id.split('__');
       const pinId = firebaseKey.shift();
       let myBoards = '';
       firebaseKey.forEach((item) => {
-        [itemId, itemName] = item.split('|');
+        [itemId, itemName] = item.split('__');
         if (itemId) {
           myBoards += `<option id='${itemId}'>${itemName}</option>`;
         }
       });
       $('#pinsPatchModal #boardId').html(myBoards);
+
       $('#pinsPatchModal #pinId').val(pinId);
     });
   </script>

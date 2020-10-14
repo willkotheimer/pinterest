@@ -1,12 +1,12 @@
 const home = () => {
   const myString = `
+  <div class="home">
   <div class="row">
   <div class="span9 ">
-  <i class="fab fa-pinterest"></i><h1>
-  <img class="logo-img" 
-  src="https://cdn11.bigcommerce.com/s-sq9zkarfah/images/stencil/1280x1280/products/126171/119440/The-Pixies-Lightning-Bolt-Band-Logo-Vinyl-Decal-Sticker__81920.1507851655.jpg?c=2"/></h1>
+  <h4>Please login</h4>
   
   </div>
+</div>
 </div>
   `;
   return myString;

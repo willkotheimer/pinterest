@@ -16,6 +16,10 @@ const boardForm = () => {
   </form>
   <div id="error-message"></div>
   <div id="success-message"></div>
+  <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
   
   </div>`;
   return myForm;
@@ -30,13 +34,11 @@ $('body').on('click', '#Boardsubmit', (e) => {
       name: $('#name').val() || false,
       numberOfPins: 0
     };
-    $('#boardUserId').val('');
-    $('#name').val('');
-    $('#imageUrl').val('');
     const finish = (uid) => {
       console.warn('finished');
       $('.modal-backdrop').removeClass('show').addClass('hide');
-      $('#boardModal').remove();
+      $('.modal').removeClass('show').addClass('hide');
+      $('#boardModal').hide();
       setTimeout(() => {
         boards.boardView(uid);
       }, 1500);

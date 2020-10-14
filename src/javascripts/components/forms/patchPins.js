@@ -11,6 +11,10 @@ const pinPatchForm = () => {
 </form>
   <div id="error-message"></div>
   <div id="success-message"></div>
+  <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
   
   </div>`;
   return myForm;
@@ -28,8 +32,9 @@ $('body').on('click', '#pinPatchSubmit', (e) => {
     $('#error-message').html('');
     pinsData.patchPins(data, pinId);
     $(`.pin-${pinId}`).remove();
-    $('#pinsPatchModal').hide();
     $('.modal-backdrop').removeClass('show').addClass('hide');
+    $('.modal').removeClass('show').addClass('hide');
+    $('#pinsPatchModal').hide();
   }
 });
 

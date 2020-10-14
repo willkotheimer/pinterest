@@ -15,10 +15,6 @@ const boardsModal = () => {
         <div class="modal-body" id="#board-form">
         ${boardForm.boardForm()}
         </div>
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
       </div>
     </div>`);
 };
@@ -36,10 +32,6 @@ const pinsModal = () => {
         <div class="modal-body" id="#board-form">
         ${pinsForm.pinForm()}
         </div>
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
       </div>
     </div>`);
 };
@@ -56,10 +48,6 @@ const pinsModalPatch = () => {
         <!-- Modal body -->
         <div class="modal-body" id="#board-form">
         ${PatchPins.pinPatchForm()}
-        </div>
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>`);

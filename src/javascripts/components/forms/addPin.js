@@ -20,6 +20,10 @@ const pinForm = () => {
   </form>
   <div id="error-message"></div>
   <div id="success-message"></div>
+  <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
   
   </div>`;
   return myForm;
@@ -34,14 +38,16 @@ $('body').on('click', '#pinSubmit', (e) => {
     boardId: $('#pinsModal #boardId').val() || false,
     linkUrl: $('#pinsModal #linkUrl').val() || false,
   };
-  $('#userId').val('');
-  $('#name').val('');
-  $('#imageUrl').val('');
-  $('#boardId').val('');
-  $('#linkUrl').val('');
+
   const finish = () => {
+    $('#userId').val('');
+    $('#name').val('');
+    $('#imageUrl').val('');
+    $('#boardId').val('');
+    $('#linkUrl').val('');
     $('.modal-backdrop').removeClass('show').addClass('hide');
-    $('#pinsModal').remove();
+    $('.modal').removeClass('show').addClass('hide');
+    $('#pinsModal').hide();
   };
   if (Object.values(data).includes(false)) {
     $('#error-message').html('<div class="alert alert-danger" role="alert">Please complete all fields</div>');
@@ -49,11 +55,7 @@ $('body').on('click', '#pinSubmit', (e) => {
     $('#error-message').html('');
     pinsData.addPins(data, data.boardId, data.Uid)
       .then(() => {
-        $('#success-message').html('<div class="alert alert-success" role="alert">Your pin Was Added!</div>');
-        setTimeout(() => {
-          $('#success-message').html('');
-        }, 1500)
-          .then(finish());
+        finish();
       }).catch((error) => console.warn(error));
   }
 });
