@@ -24,7 +24,7 @@ const deleteOrphanedPin = (pinId) => {
 };
 /* Delete Pins that have the deleted boardID attached to them */
 const getAllOrphanedPins = (boardId) => new Promise((resolve, reject) => {
-  axios.get(`${baseUrl}/pins.json?orderBy="boardId"&equalTo=${boardId}`)
+  axios.get(`${baseUrl}/pins.json?orderBy="boardId"&equalTo="${boardId}"`)
     .then((response) => {
       const boards = response.data;
       const board = [];
@@ -41,8 +41,6 @@ const addBoard = (data) => axios.post(`${baseUrl}/boards.json`, data)
   .then((response) => {
     const update = { firebaseKey: response.data.name };
     axios.patch(`${baseUrl}/boards/${response.data.name}.json`, update);
-    $('#boardsModal').modal('toggle');
-    $('modal-backdrop').remove();
   }).catch((error) => console.warn(error));
 
 const showBoards = (userId) => {
@@ -54,9 +52,9 @@ const showBoards = (userId) => {
     .then((response) => {
       Object.keys(response).forEach((key) => {
         const item = response[key];
-        myString += `<div id='${item.firebaseKey}|${userId}' class='board board-${item.firebaseKey}'>
+        myString += `<div id='${item.firebaseKey}__${userId}' class='board board-${item.firebaseKey}'>
         <div class='button-container'>
-        <div class='delete-board' id='delete-${item.firebaseKey}' data-toggle="tooltip" data-placement="top" title="Delete Board"><i class="fas fa-minus-circle"></i></div>
+        <div class='delete-board' id='delete__${item.firebaseKey}' data-toggle="tooltip" data-placement="top" title="Delete Board"><i class="fas fa-minus-circle"></i></div>
         </div>
         <div class='board-image'>
         <img class='board-img' src='${item.imageUrl}'/>
@@ -69,29 +67,23 @@ const showBoards = (userId) => {
     });
 };
 
-/* post button */
-$('body').on('click', '.edit-board', (e) => {
-  e.stopImmediatePropagation();
-  const firebaseKey = e.currentTarget.id;
-  console.warn(`edit board: ${firebaseKey}`);
-});
-
 /* delete button */
 $('body').on('click', '.delete-board', (e) => {
   e.stopImmediatePropagation();
-  const firebaseKey = (e.currentTarget.id).split('-')[1];
-  console.warn(firebaseKey);
+  const firebaseKey = (e.currentTarget.id).split('__')[1];
   deleteBoard(firebaseKey);
   $(`.board-${firebaseKey}`).remove();
   Promise.all([getAllOrphanedPins(firebaseKey)])
     .then((values) => {
-      Object.keys(values).forEach((key) => {
-        const item = values[key];
-        Object.values(item).forEach((item2) => {
-          deleteOrphanedPin(item2.id);
+      if (values) {
+        Object.keys(values).forEach((key) => {
+          const item = values[key];
+          Object.values(item).forEach((item2) => {
+            deleteOrphanedPin(item2.id);
+          });
         });
-      });
-    });
+      }
+    }).catch((error) => console.warn(error));
 });
 
 export default { showBoards, addBoard, boardsInfo };

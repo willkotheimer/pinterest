@@ -1,7 +1,6 @@
 import boardForm from '../forms/addBoard';
 import pinsForm from '../forms/addPin';
 import PatchPins from '../forms/patchPins';
-import boardData from '../../helpers/data/boardData';
 
 const boardsModal = () => {
   $('#boardModal').html(`<!-- The Modal -->
@@ -15,10 +14,6 @@ const boardsModal = () => {
         <!-- Modal body -->
         <div class="modal-body" id="#board-form">
         ${boardForm.boardForm()}
-        </div>
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>`);
@@ -37,10 +32,6 @@ const pinsModal = () => {
         <div class="modal-body" id="#board-form">
         ${pinsForm.pinForm()}
         </div>
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
       </div>
     </div>`);
 };
@@ -58,28 +49,13 @@ const pinsModalPatch = () => {
         <div class="modal-body" id="#board-form">
         ${PatchPins.pinPatchForm()}
         </div>
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
       </div>
     </div>`);
-};
-
-const registerPatch = () => {
-  $('#pinsPatchModal').on('show.bs.modal', (event) => {
-    const firebaseKey = event.relatedTarget.id.split('-')[1];
-    console.warn(firebaseKey);
-    console.warn('my stuff here:', boardData.boardsInfo(firebaseKey));
-    // $('#pinsPatchModal #userId').val(firebaseKey);
-    // $('#pinsPatchModal #boardId').val(firebaseKey);
-  });
 };
 
 export default
 {
   boardsModal,
   pinsModal,
-  pinsModalPatch,
-  registerPatch
+  pinsModalPatch
 };

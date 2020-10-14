@@ -18,8 +18,7 @@ const checkLoginStatus = () => {
       // Create events to make boards go to pins:
       $('body').on('click', '.board', (e) => {
         const boardClicked = e.currentTarget.id;
-        const [boardId, userId] = boardClicked.split('|');
-        console.warn(boardId, userId);
+        const [boardId, userId] = boardClicked.split('__');
         const myPins = pinsData.showPins(boardId, userId);
         pinsView.PinView(myPins);
       });

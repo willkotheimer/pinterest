@@ -10,7 +10,6 @@ const boardIdsByUser = (userId) => new Promise((resolve, reject) => {
       const boards = [];
       if (userBoards) {
         Object.values(userBoards).forEach((board) => {
-          console.warn(Number(board.boardId));
           boards.push(Number(board.boardId));
         });
         resolve(boards);
