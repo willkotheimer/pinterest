@@ -1,5 +1,7 @@
 @import "~bootstrap/scss/bootstrap";
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
+@import './components';
+@import './views';
 
 body {
   background-color: white;
@@ -15,41 +17,8 @@ body {
   display: none;
 }
 
-#pinboard {
-  margin-left: 20px;
-}
-
-.add-board {
-  margin-left: 50px;
-}
-
 h1 {
   margin-left: 50px;
-}
-.myBoards, .myPins {
-  margin: 30px 50px;
-  margin: 0 auto;
-  display:flex;
-  flex-flow: row wrap;
-  max-width:90%;
-}
-.add-pin, .add-board, .home {
-  margin: 30px 50px;
-}
-.board-img, .pin-img {
-  height: 200px;
-  width: auto;
-}
-
-.board, .pin {
-  margin: 10px;
-  padding: 10px;
-  border: 1px solid brown;
-   /*drop shadow*/
-   -webkit-box-shadow: 7px 7px 5px 0px rgba(78, 49, 49, 0.75);
-   -moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.75);
-   box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.75);
-   max-width:330px;
 }
 
 .button-container {

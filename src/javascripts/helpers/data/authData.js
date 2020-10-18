@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import home from '../../components/home/home';
-import boards from '../../components/boards/board';
+import boards from '../../components/views/boardView';
 import userData from './userData';
 import pinsData from './pinsData';
 import pinsView from '../../components/views/pinView';
