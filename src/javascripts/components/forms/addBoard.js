@@ -1,5 +1,5 @@
 import boardData from '../../helpers/data/boardData';
-import boards from '../boards/board';
+import boards from '../views/boardView';
 
 const boardForm = () => {
   const myForm = `<form>

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import apiKeys from '../apiKeys.json';
-import boards from '../../components/boards/board';
+import boards from '../../components/views/boardView';
 import pinsView from '../../components/views/pinView';
 
 const baseUrl = apiKeys.firebaseKeys.databaseURL;
