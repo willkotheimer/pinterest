@@ -1,5 +1,6 @@
 #pinboard {
-  margin-left: 20px;
+  margin-left: 15px;
+  color: #000;
 }
 .myPins {
   margin: 30px 50px;
@@ -17,11 +18,6 @@
 }
 .pin {
   margin: 10px;
-  padding: 10px;
-  border: 1px solid brown;
-   /*drop shadow*/
-   -webkit-box-shadow: 7px 7px 5px 0px rgba(78, 49, 49, 0.75);
-   -moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.75);
-   box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.75);
-   max-width:330px;
+  max-width:330px;
+  background-color:white;
 }
