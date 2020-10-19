@@ -20,6 +20,15 @@ Bootstrap, Firebase, Axios
 
 [https://www.figma.com/file/oY5oI8BwFVNAjzmE8YR79G/Pinterest-Clone?node-id=0%3A1](https://www.figma.com/file/oY5oI8BwFVNAjzmE8YR79G/Pinterest-Clone?node-id=0%3A1)
 
+## How to test
+
+`git clone [branch]`
+`git fetch origin development`
+`git checkout development`
+cd into folder
+`npm install`
+`npm start`
+
 ## URL
 
 [Hosting URL: https://pinterest-32a4e.web.app](Hosting URL: https://pinterest-32a4e.web.app)
