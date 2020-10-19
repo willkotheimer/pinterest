@@ -31,7 +31,7 @@ $('body').on('click', '#pinPatchSubmit', (e) => {
   } else {
     $('#error-message').html('');
     pinsData.patchPins(data, pinId);
-    $(`.pin-${pinId}`).remove();
+    $(`#${pinId}`).remove();
     $('.modal-backdrop').removeClass('show').addClass('hide');
     $('.modal').removeClass('show').addClass('hide');
     $('#pinsPatchModal').hide();

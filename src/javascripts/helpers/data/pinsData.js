@@ -45,7 +45,7 @@ const showPins = (boardId, user) => {
   boardsInfoHelper(user)
     .then((response) => {
       Object.keys(response).forEach((key) => {
-        myBoards += `${response[key]}__`;
+        myBoards += `${response[key]}:`;
       });
     });
   let myString = `<button id='${user}' type='button' class='backToBoards btn btn-warning'><i class='fas fa-chevron-circle-left'></i></button>`;
@@ -53,7 +53,6 @@ const showPins = (boardId, user) => {
     .then((response) => {
       Object.keys(response).forEach((key) => {
         const item = response[key];
-        console.warn('boardId', boardId);
         if (item) {
           myString += `<div id="${item.pinId.name}" class='pin'><div class='button-container'><button class='btn btn-danger delete-pin' id='${item.pinId.name}__${boardId}__${user}' 
         data-toggle="tooltip" data-placement="top" title="Delete Pin"><i class="fas fa-minus-circle"></i></button>
@@ -83,7 +82,7 @@ const showPins = (boardId, user) => {
         e.stopImmediatePropagation();
         const firebaseKey = e.currentTarget.id;
         const [pinId, bid, userId] = firebaseKey.split('__');
-        $(`#${pinId}`).remove();
+        $(`#${e.currentTarget.id}`).remove();
         deletePin(pinId);
         const myPins = showPins(bid, userId);
         pinsView.PinView(myPins);

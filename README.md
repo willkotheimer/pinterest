@@ -1,5 +1,5 @@
-# Pinterest
 
+# Pinterest
 
 ## Motivation
 The motivation behind this project is to mock up a dashboard that 
