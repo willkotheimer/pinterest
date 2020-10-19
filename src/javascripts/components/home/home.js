@@ -2,7 +2,7 @@ const home = () => {
   const myString = `
   <div class="home">
   <div class="row">
-  <div class="span9 ">
+  <div class="span9">
   <h4>Please login</h4>
   
   </div>

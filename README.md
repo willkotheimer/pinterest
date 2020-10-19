@@ -1,45 +1,69 @@
-# pinterest
 
-# Week 14 - MILESTONE Project -Pinterest
-This was a project that allowed us to build a version of Pinterest to build api skills to CREATE, READ, UPDATE, and DELETE  data, as well as the firebase login.
+# Pinterest
 
 ## Motivation
-The motivation of the assignment was to build a more fully realized application, using firebase as a login and api, and hosting, and to use axios and postman to utilize the endpoints of the firebase api. The idea of the organization of the app was separate concerns, between data and views.
+The motivation behind this project is to mock up a dashboard that 
+mimics Pinterest and which has crud capabilities and uses an api (in this case, firebase)
 
 ## Build status
-MVP complete. But has a certain bug in places. After submitting a form, the bootstrap backdrop is still staying on screen and the page is not updating. Still working on this, but the workaround is currently to press F5 to see the changes.
+MVP
 
-## Tools
-Vanilla Javascript ES6, Jquery, HTML5, CSS3, axios and postman for api fetching, firebase for authentication, api endpoints and file database.
+## Code Style
+Javascript ES6, Jquery, HTML5, CSS3
+Bootstrap, Firebase, Axios
 
-## Screenshots
+## ERD
 
+[https://app.lucidchart.com/lucidchart/47ce6966-9bc7-4abe-8a99-7284c05fe3a7/edit?shared=true&page=0_0#?folder_id=home&browser=icon](https://app.lucidchart.com/lucidchart/47ce6966-9bc7-4abe-8a99-7284c05fe3a7/edit?shared=true&page=0_0#?folder_id=home&browser=icon)
 
+## Figma
+
+[https://www.figma.com/file/oY5oI8BwFVNAjzmE8YR79G/Pinterest-Clone?node-id=0%3A1](https://www.figma.com/file/oY5oI8BwFVNAjzmE8YR79G/Pinterest-Clone?node-id=0%3A1)
+
+## How to test
+
+`git clone [branch]`
+`git fetch origin development`
+`git checkout development`
+cd into folder
+`npm install`
+`npm start`
 
 ## URL
 
-[https://pinterest-32a4e.web.app](https://pinterest-32a4e.web.app)
+[Hosting URL: https://pinterest-32a4e.web.app](Hosting URL: https://pinterest-32a4e.web.app)
+
+## Screenshots:
+![](addBoard.PNG)
+
+![](addPin.PNG)
 
 ## Features
-This site features a way to add and delete boards, and add, delete, and update Pins.
+This site has a way to do crud functionality on Boards and Pins.
+There is an ability to create and delete a board, create and delete
+a pin and edit a pin to choose a different board. It also has basic
+google authentication.
 
 ## Code Example
+
 ```
-const PinsInfo = (BoardfirebaseKey) => new Promise((resolve, reject) => {
-  axios.get(`${baseUrl}/pins.json?orderBy="boardId"&equalTo="${BoardfirebaseKey}"`)
+/* Gets boards that have the userID attached to them */
+const boardsInfo = (userId) => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/boards.json?orderBy="Uid"&equalTo="${userId}"`)
     .then((response) => {
-      const pins = response.data;
-      const pinsToReturn = [];
-      if (pins) {
-        Object.keys(pins).forEach((pin) => {
-          pinsToReturn.push(pins[pin]);
+      const boards = response.data;
+      const board = [];
+      if (boards) {
+        Object.keys(boards).forEach((boardId) => {
+          board.push(boards[boardId]);
         });
       }
-      resolve(pinsToReturn);
+      resolve(board);
     }).catch((error) => reject(error));
 });
+
 ```
-## Github owner
 
-[Will Kotheimer](https://github.com/willkotheimer/pinterest)
+## Team
 
+[Will Kotheimer](https://github.com/willkotheimer)
