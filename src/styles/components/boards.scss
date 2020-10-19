@@ -4,20 +4,18 @@
   display:flex;
   flex-flow: row wrap;
   max-width:90%;
+  color: #000;
 }
-.add-board {
-  margin: 30px 50px;
+button.btn.btn-primary.add-board {
+  margin: 0px 60px;
 }
+
 .board-img {
   height: 200px;
   width: auto;
 }
 .board {
-  margin: 10px;
-   /*drop shadow*/
-   -webkit-box-shadow: 7px 7px 5px 0px rgba(78, 49, 49, 0.75);
-   -moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.75);
-   box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+   margin: 10px;
    max-width:330px;
    background-color: white;
 }
